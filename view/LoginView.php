@@ -23,6 +23,7 @@ class LoginView {
 		$message = '';
 		
 		$response = $this->generateLoginFormHTML($message);
+        //TODO: when session implemented refactor this to if(loggedin)else
 		//$response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
