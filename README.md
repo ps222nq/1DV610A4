@@ -1,2 +1,4 @@
-# Login_1DV608
-Interface repository for 1DV608 assignment 2 and 4
+# 1DV610 Assignment 4
+Repository for assignment 4 in the 1DV610 Software Quality course at Linnaeus University  
+   
+
