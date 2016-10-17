@@ -26,8 +26,13 @@ class RequestHandler {
         }
 
         if(isset($this->data['LoginView::Logout'])){
-            $lc = new LoginController($this->data);
-            $lc->doLogout();
+            try {
+                $lc = new LoginController($this->data);
+                $lc->doLogout();
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+
         }
     }
 }
