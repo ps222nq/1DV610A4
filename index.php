@@ -15,9 +15,16 @@ $v = new LoginView();
 $dtv = new DateTimeView();
 $lv = new LayoutView();
 
-//session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 
-$lv->render(false, $v, $dtv);
+if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
+    $lv->render(true, $v, $dtv);
+} else {
+    $lv->render(false, $v, $dtv);
+}
+
 
 if(isset($_POST)){
     $rh = new \controller\RequestHandler($_POST);
