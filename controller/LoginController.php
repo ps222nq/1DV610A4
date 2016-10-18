@@ -2,6 +2,8 @@
 
 namespace controller;
 
+require_once("model/Database.php");
+
 class LoginController {
 
     private $data;
@@ -21,22 +23,32 @@ class LoginController {
         } elseif (empty($password)) {
             return "Password is missing";
         } else {
-            try {
-                $this->authenticateUser($username, $password);
-            } catch (\Exception $e) {
-                return "Something went wrong, please try again: Error message was " . $e->getMessage();
+            if($this->authenticateUser($username, $password)){
+                $this->setSessionOnLogin($username);
+                return "Welcome";
             }
         }
-
-    }
-
-    public function doLogout()
-    {
-        //todo: add logout code
     }
 
     public function authenticateUser($username, $password)
     {
-        //todo: add code that validates username and pwd if form OK
+        try {
+            $dbc = new \model\Database();
+            return $dbc->authenticateUser($username, $password);
+        } catch (\Exception $e) {
+            return "Something went wrong, please try again: Error message was " . $e->getMessage();
+        }
+    }
+
+    public function setSessionOnLogin($username)
+    {
+        $_SESSION["username"] = $username;
+        $_SESSION["loggedIn"] = true;
+    }
+
+
+    public function doLogout()
+    {
+        //todo: add logout code
     }
 }

@@ -15,6 +15,7 @@ $v = new LoginView();
 $dtv = new DateTimeView();
 $lv = new LayoutView();
 
+//session_start();
 
 $lv->render(false, $v, $dtv);
 
