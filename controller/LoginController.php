@@ -15,6 +15,7 @@ class LoginController {
 
     public function doLogin()
     {
+
         $username = $this->data["LoginView::UserName"];
         $password = $this->data["LoginView::Password"];
 
@@ -49,6 +50,7 @@ class LoginController {
 
     public function doLogout()
     {
-        //todo: add logout code
+        session_unset();
+        return "Bye bye";
     }
 }
