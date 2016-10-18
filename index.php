@@ -19,6 +19,12 @@ if(!isset($_SESSION)){
     session_start();
 }
 
+if(!empty($_POST)){
+    $rh = new \controller\RequestHandler($_POST);
+    $rh->handlePOSTRequest();
+}
+
+//todo: fix this so shows correct h2 for logged in status!
 if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
     $lv->render(true, $v, $dtv);
 } else {
@@ -26,8 +32,4 @@ if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
 }
 
 
-if(isset($_POST)){
-    $rh = new \controller\RequestHandler($_POST);
-    $rh->handlePOSTRequest();
-}
 

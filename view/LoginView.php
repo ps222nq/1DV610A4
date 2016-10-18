@@ -28,9 +28,11 @@ class LoginView {
         if(!empty($_POST)){
             $lc = new \controller\LoginController($_POST);
 
-            if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
+            if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == false){
                 $message = $lc->doLogin();
-            } else {
+            }
+
+            if(isset($_POST["LoginView::Logout"])){
                 $message = $lc->doLogout();
             }
         }
