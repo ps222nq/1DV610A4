@@ -15,8 +15,10 @@ class LoginController {
 
     public function doLogin()
     {
+        if(isset($_POST['LoginView::Login'])){
         $username = $this->data["LoginView::UserName"];
         $password = $this->data["LoginView::Password"];
+        }
 
         if(empty($username)) {
             return "Username is missing";
@@ -26,6 +28,8 @@ class LoginController {
             if($this->authenticateUser($username, $password)){
                 $this->setSessionOnLogin($username);
                 return "Welcome";
+            } else {
+                return "Wrong name or password";
             }
         }
     }
@@ -44,6 +48,8 @@ class LoginController {
     {
         $_SESSION["username"] = $username;
         $_SESSION["loggedIn"] = true;
+        //$_SESSION["message"] = "Welcome";
+        session_regenerate_id();
     }
 
 
@@ -51,6 +57,6 @@ class LoginController {
     {
         $_SESSION["loggedIn"] = false;
         unset($_SESSION["username"]);
-        return "Bye bye";
+        return "Bye bye!";
     }
 }

@@ -28,23 +28,25 @@ class LoginView {
         if(!empty($_POST)){
             $lc = new \controller\LoginController($_POST);
 
-            if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == false){
+            if(isset($_POST["LoginView::Login"])){
                 $message = $lc->doLogin();
+
+                if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
+                    $response = $this->generateLogoutButtonHTML($message);
+                } else {
+                    $response = $this->generateLoginFormHTML($message);
+                }
             }
 
             if(isset($_POST["LoginView::Logout"])){
                 $message = $lc->doLogout();
+                $response = $this->generateLoginFormHTML($message);
             }
-        }
 
-        if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
-            $response = $this->generateLogoutButtonHTML($message);
         } else {
             $response = $this->generateLoginFormHTML($message);
         }
 
-        //TODO: when session implemented refactor this to if(loggedin)else
-        //$response .= $this->generateLogoutButtonHTML($message);
         return $response;
     }
 

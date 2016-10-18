@@ -15,21 +15,16 @@ $v = new LoginView();
 $dtv = new DateTimeView();
 $lv = new LayoutView();
 
-if(!isset($_SESSION)){
-    session_start();
-}
+session_start();
 
-if(!empty($_POST)){
-    $rh = new \controller\RequestHandler($_POST);
-    $rh->handlePOSTRequest();
-}
-
-//todo: fix this so shows correct h2 for logged in status!
-if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true){
+if(!isset($_SESSION["loggedIn"])){
+    $lv->render(false, $v, $dtv);
+} elseif ($_SESSION["loggedIn"] == false){
     $lv->render(true, $v, $dtv);
 } else {
     $lv->render(false, $v, $dtv);
 }
+
 
 
 
